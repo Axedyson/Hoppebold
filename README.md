@@ -6,4 +6,4 @@
 ## Beskrivelse
 
 Mange hoppebolde der kan reflektere på alle vinduets sider samt en bund der ligner jorden (græs og jord) med en flot baggrund der skal forestille himlen.
-Disse hoppebolde kan også reflektere på hinanden. Der er også en tyngdekraft der er med til at hive hoppebolden ned mod jorden. Hver gang en hoppebold rammer jorden så hopper den op igen, og sådan bliver det bare ved.
+Disse hoppebolde kan også reflektere på hinanden. Der er også en tyngdekraft der er med til at hive hoppeboldene ned mod jorden. Hver gang en hoppebold rammer jorden så hopper den op igen, og sådan bliver det bare ved.
