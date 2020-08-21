@@ -1,2 +1,4 @@
-# Hoppebold
- Animere en hoppebold, der reflektere på alle programvindue-kanter. Man skal kunne lave flere hoppebolde og de skal kunne "ramme" hinanden.  Der skal være en flot baggrund og jorden som boldene hopper på skal ikke bare være flad. Man skal kunne begynde forfra
+# Hoppebold projekt
+### Fag: Digital Design
+### Gruppe: Anders fra L 3d2 og Camilla fra L 3i
+### Deadline: 25/8-2020 23:00
