@@ -4,4 +4,6 @@ void setup() {
 
 void draw() {
 	background(255);
+	translate(width / 2, height / 2);
+	circle(0, 0, 20);
 }
