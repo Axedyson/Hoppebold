@@ -2,7 +2,7 @@ HoppeBold hoppeBold;
 
 void setup() {
 	size(900, 900);
-	hoppeBold = new HoppeBold(50, 10);
+	hoppeBold = new HoppeBold(50, 20);
 }
 
 void draw() {
