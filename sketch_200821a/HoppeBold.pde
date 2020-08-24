@@ -3,18 +3,18 @@ class HoppeBold {
   PVector velocity;
   PVector acceleration;
 
-  int diameter;
-  int radius;
+  float diameter;
+  float radius;
 
   float xBoundary;
   float yBoundary;
 
 
-  HoppeBold(int diameter, int mass) {
+  HoppeBold(int diameter, int mass, int grassHeight) {
     this.diameter = diameter;
     this.radius = diameter / 2;
     this.xBoundary = width - radius;
-    this.yBoundary = height - radius;
+    this.yBoundary = height - radius - grassHeight;
 
     // Lav en lokations vektor med tilfældige x og y koordinater
     // De tilfældige tal genereres i intervallet [radiues; vinduets længder MINUS radiues].
@@ -51,10 +51,32 @@ class HoppeBold {
   }
 
   void display() {
+    fill(127,255,0);
     circle(location.x, location.y, diameter);
   }
 
-  void checkEdges() {
+  void checkCollision(Bakke[] bakker) {
+    for (Bakke bakke : bakker) {
+      // Boldens radius og bakkens radiues lægges sammen
+      // så vi får den minimum længde de kan være fra hinanden
+      float minimumDist = radius + bakke.diameter / 2;
+      float actualDist = dist(location.x, location.y, bakke.x, bakke.y);
+      if (actualDist < minimumDist) {
+        // En del af koden under denne kommentar er stjålet herfra: https://processing.org/examples/bouncybubbles.html
+        float dx = bakke.x - location.x;
+        float dy = bakke.y - location.y;
+        float spring = 0.5;
+        
+        float angle = atan2(dy, dx);
+        float targetX = location.x + cos(angle) * minimumDist;
+        float targetY = location.y + sin(angle) * minimumDist;
+        float ax = (targetX - bakke.x) * spring;
+        float ay = (targetY - bakke.y) * spring;
+        velocity.sub(new PVector(ax, ay));
+        createFrictionForce();
+      } 
+    }
+    
     if (location.x >= xBoundary) {
       velocity.x *= -1;
       location.x = xBoundary;
