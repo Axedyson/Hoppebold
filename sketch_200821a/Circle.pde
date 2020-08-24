@@ -18,7 +18,7 @@ class HoppeBold {
 
     // Lav en velocity vektor med en tilfældig retning men med samme faste skalar.
     // Så den altid vil have nogenlunde fast fart
-    this.velocityScalar = 6;
+    this.velocityScalar = 10;
     this.velocity = new PVector(
       random(1) * this.velocityScalar,
       random(1) * this.velocityScalar
