@@ -14,7 +14,6 @@ til at stoppe på et tidspunkt.
 Github repository URL: https://github.com/AndysonDK/Hoppebold
 */
 
-HoppeBold hoppeBold;
 int randomSeed;
 
 // Programmet fungerer åbenbart ikke hensigtsmæssigt
