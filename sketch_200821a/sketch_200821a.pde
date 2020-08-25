@@ -5,15 +5,15 @@ int randomSeed;
 // når man initialiserer grassHeight variablen inde i setup() metoden  :/
 int grassHeight = 7;
 
-Bakke[] bakker = new Bakke[10];
-HoppeBold[] hoppeBolde = new HoppeBold[5];
+Bakke[] bakker = new Bakke[2];
+ArrayList<HoppeBold> hoppeBolde = new ArrayList<HoppeBold>();
 
 void setup() {
 	size(900, 900);
   randomSeed = int(random(999999999));
   
   // Lav hoppebold
-  for (int i = 0; i < hoppeBolde.length; i++) hoppeBolde[i] = new HoppeBold(50, 20, grassHeight);
+  for (int i = 0; i < 10; i++) hoppeBolde.add(new HoppeBold(50, 20, grassHeight));
   
   // Lav bakker!
   for (int i = 0; i < bakker.length; i++) bakker[i] = new Bakke();
@@ -23,8 +23,11 @@ void draw() {
 	background(25, 170, 229);
   drawNiceBackground();
   for (HoppeBold hoppeBold : hoppeBolde) {
+    ArrayList<HoppeBold> hoppeBolde2 = new ArrayList<HoppeBold>(hoppeBolde);
+    hoppeBolde2.remove(hoppeBold);
+    
     hoppeBold.update();
-    hoppeBold.checkCollision(bakker);
+    hoppeBold.checkCollision(bakker, hoppeBolde2);
     hoppeBold.display();
   }
 }

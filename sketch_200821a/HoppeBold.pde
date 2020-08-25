@@ -8,8 +8,7 @@ class HoppeBold {
 
   float xBoundary;
   float yBoundary;
-
-
+  
   HoppeBold(int diameter, int mass, int grassHeight) {
     this.diameter = diameter;
     this.radius = diameter / 2;
@@ -24,7 +23,7 @@ class HoppeBold {
       random(radius, yBoundary)
     );
 
-    int velocityScalar = 8;
+    int velocityScalar = 2;
     this.velocity = new PVector(
       random(1) * velocityScalar, 
       random(1) * velocityScalar
@@ -46,6 +45,10 @@ class HoppeBold {
   }
 
   void update() {
+    if (velocity.mag() > 20) {
+      velocity.normalize();
+      velocity.mult(19);
+    }
     velocity.add(acceleration);
     location.add(velocity);
   }
@@ -55,7 +58,7 @@ class HoppeBold {
     circle(location.x, location.y, diameter);
   }
 
-  void checkCollision(Bakke[] bakker) {
+  void checkCollision(Bakke[] bakker, ArrayList<HoppeBold> hoppeBolde) {
     for (Bakke bakke : bakker) {
       // Boldens radius og bakkens radiues lægges sammen
       // så vi får den minimum længde de kan være fra hinanden
@@ -75,6 +78,28 @@ class HoppeBold {
         velocity.sub(new PVector(ax, ay));
         createFrictionForce();
       } 
+    }
+    
+    for (HoppeBold hoppeBold : hoppeBolde) {
+      float minDist = hoppeBold.radius + radius;
+      float actualDist = dist(location.x, location.y, hoppeBold.location.x, hoppeBold.location.y);
+      
+      if (actualDist < minDist) {
+        float dx = hoppeBold.location.x - location.x;
+        float dy = hoppeBold.location.y - location.y;
+        float spring = 0.5;
+        
+        float angle = atan2(dy, dx);
+        float targetX = location.x + cos(angle) * minDist;
+        float targetY = location.y + sin(angle) * minDist;
+        float ax = (targetX - hoppeBold.location.x) * spring;
+        float ay = (targetY - hoppeBold.location.y) * spring;
+        
+        PVector velocity2 = new PVector(ax, ay);
+        velocity.sub(velocity2);
+        
+        hoppeBold.velocity.add(velocity2);
+      }
     }
     
     if (location.x >= xBoundary) {
