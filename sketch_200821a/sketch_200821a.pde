@@ -5,27 +5,40 @@ int randomSeed;
 // når man initialiserer grassHeight variablen inde i setup() metoden  :/
 int grassHeight = 7;
 
-Bakke[] bakker = new Bakke[2];
-ArrayList<HoppeBold> hoppeBolde = new ArrayList<HoppeBold>();
+Bakke[] bakker = new Bakke[5];
+ArrayList<HoppeBold> hoppeBolde;
 
 void setup() {
-	size(900, 900);
+  size(900, 900);
   randomSeed = int(random(999999999));
-  
+
   // Lav hoppebold
+  hoppeBolde = new ArrayList<HoppeBold>();
   for (int i = 0; i < 10; i++) hoppeBolde.add(new HoppeBold(50, 20, grassHeight));
-  
+
   // Lav bakker!
   for (int i = 0; i < bakker.length; i++) bakker[i] = new Bakke();
 }
 
 void draw() {
-	background(25, 170, 229);
+  background(25, 170, 229);
   drawNiceBackground();
+
+  // Lopp igennem hver hoppebold og gør følgende:
+  // 1.) Opdater dens lokations vektor
+  // 2.) Tjek for kollision
+  // 3.) Og til sidst vis/tegn hoppebolden
   for (HoppeBold hoppeBold : hoppeBolde) {
+    // Jeg bliver nødt til at lave et helt nyt array,
+    // så jeg kan fjerne den hoppebold jeg arbejder med lige nu i det nuværende loop
+    // da jeg ikke skal bruge den samme hoppebold til at tjekke om jeg har ramt :D
     ArrayList<HoppeBold> hoppeBolde2 = new ArrayList<HoppeBold>(hoppeBolde);
     hoppeBolde2.remove(hoppeBold);
-    
+
+    // Her opdaterer jeg hver hoppebold's lokation og tjekker for dens kollision
+    // med alle andre hoppebolde inde i det array der hedder hoppeBolde2.
+    // Jeg tjekker også kollision for hver bold og alle bakkerne
+    // Til sidst "displayer" jeg dem bare.
     hoppeBold.update();
     hoppeBold.checkCollision(bakker, hoppeBolde2);
     hoppeBold.display();
@@ -37,10 +50,10 @@ void drawNiceBackground() {
   // indbygget random() funktion i processing ved med at generere de SAMME tilfældige resultater!
   // Læs mere her: https://processing.org/reference/randomSeed_.html
   randomSeed(randomSeed);
-  
+
   drawClouds();
   drawGround();
-  
+
   // Nulstil kant værdier
   stroke(0);
   strokeWeight(1);
@@ -53,7 +66,7 @@ void drawClouds() {
     float y = random(0, height / 3);
     float xSize = random(100, 230);
     float ySize = random(70, xSize);
-    
+
     fill(255);
     noStroke();
     ellipse(x, y, xSize, ySize);
@@ -63,6 +76,6 @@ void drawClouds() {
 void drawGround() {
   fill(111, 227, 0);
   rect(0, height - grassHeight, width, grassHeight);
-  
+
   for (Bakke bakke : bakker) bakke.display(); 
 }

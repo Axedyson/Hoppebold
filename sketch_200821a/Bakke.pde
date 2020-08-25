@@ -2,13 +2,13 @@ class Bakke {
   float x;
   float y;
   float diameter;
-  
+
   Bakke() {
     this.x = random(width);
     this.y = height;
     this.diameter = random(100, 230);
   }
-  
+
   void display() {
     stroke(111, 227, 0);
     strokeWeight(7);
