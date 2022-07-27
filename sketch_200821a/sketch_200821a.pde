@@ -11,7 +11,7 @@ med en flot baggrund der skal forestille himlen. Disse hoppebolde kan også refl
 Der er også tyngdekraft der hiver hoppeboldene ned mod jorden, samt friktion på jorden for at få boldene
 til at stoppe på et tidspunkt.
 
-Github repository URL: https://github.com/AndysonDK/Hoppebold
+Github repository URL: https://github.com/Axedyson/Hoppebold
 */
 
 int randomSeed;
